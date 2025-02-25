@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  outline: transparent !important;
+  /* border: 1px solid red !important; */
+}
+:root {
+  --primary-color: #424769;
+  --secondary-color: #ffc694;
+  /* text-color */
+  --text-white: #fff;
+  --text-gray: #424769;
+  /* background */
+  --background: #676c8e;
+}
+/* general */
+body {
+  background: #2d3250;
+}
+h1,
+h2 {
+  color: var(--text-white);
+  border-bottom: 2px solid var(--secondary-color) !important;
+  width: fit-content;
+  margin: 0 auto;
+}
+h2 {
+  font-size: 12px;
+}
+input {
+  background: var(--background) !important;
+  border-radius: 0 !important;
+  color: var(--text-white) !important;
+}
+input:focus {
+  border-left: 5px solid var(--secondary-color) !important;
+}
+label:after {
+  background: none !important;
+  color: var(--text-gray) !important;
+  margin-bottom: 5px;
+}
+hr {
+  border: 1px solid #ffc694 !important;
+  opacity: 1;
+}
+/* buttons */
+button {
+  font-weight: 500;
+}
+#supptbtn {
+  background: red;
+  padding: 10px;
+  color: var(--text-gray);
+  border-radius: 5px;
+}
+#editbtn {
+  background: #ffc694;
+  padding: 10px;
+  color: var(--text-white);
+  border-radius: 5px;
+}
+#addbtn {
+  background: var(--secondary-color);
+  color: var(--text-gray);
+  padding: 10px 0;
+  border-radius: 5px;
+}
+#edit {
+  background: rgb(171, 66, 2) !important;
+  color: var(--text-white);
+  padding: 10px 0;
+  border-radius: 5px;
+}
+.user-part {
+  overflow-x: auto;
+}
+/* tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--background) !important;
+}
+thead th {
+  border: 1px solid var(--secondary-color) !important;
+}
+thead th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+thead th:last-of-type {
+  border-right: 1px solid var(--secondary-color) !important;
+}
+td {
+  border-top: 1px solid var(--secondary-color) !important;
+}
+td:nth-child(2) {
+  border-left: 1px solid var(--secondary-color) !important;
+}
+td:nth-child(3) {
+  border-left: 1px solid var(--secondary-color) !important;
+  border-right: 1px solid var(--secondary-color) !important;
+}
+td:nth-child(4) {
+  border-right: 1px solid var(--secondary-color) !important;
+}
+tbody tr:hover {
+  background: var(--primary-color) !important;
+}
