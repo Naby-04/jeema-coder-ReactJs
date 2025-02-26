@@ -9,6 +9,11 @@ class App extends React.Component {
     } catch (e) {
       storedUsers = []; // En cas d'erreur, on met un tableau vide
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleCallEdit = this.handleCallEdit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       user: { prenom: "", nom: "", email: "", telephone: "" }, // Pour stocker les données de chaque utilisateur
       users: storedUsers || [], // pour stocker la liste des utilisaeurs dans le local storage
@@ -16,10 +21,6 @@ class App extends React.Component {
       currentIndex: null,
       submitType: this.handleSubmit,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleCallEdit = this.handleCallEdit.bind(this);
   }
 
   handleChange(event) {
@@ -34,17 +35,26 @@ class App extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("liste utilisateurs avant mise à jour:", this.state.users);
 
-    if (this.state.user !== "") {
-      this.setState({
-        users: [...this.state.users, this.state.user],
-      });
-      localStorage.setItem("users", JSON.stringify(this.state.users));
+    if (
+      this.state.user.prenom !== "" &&
+      this.state.user.nom !== "" &&
+      this.state.user.email !== "" &&
+      this.state.user.telephone !== ""
+    ) {
+      this.setState(
+        (prevState) => ({
+          users: [...prevState.users, prevState.user],
+          user: { prenom: "", nom: "", email: "", telephone: "" }, // Réinitialiser l'input
+        }),
+        () => {
+          // Mettre à jour le localStorage APRÈS la mise à jour du state
+          localStorage.setItem("users", JSON.stringify(this.state.users));
+        }
+      );
     }
-
-    this.setState({ user: { prenom: "", nom: "", email: "", telephone: "" } });
   }
+
   handleDelete = (index) => {
     // pour supprimer l'element nous allons creer une nouvelles liste des utilisateurs sans y integrer l'element à supprimer avec la methode filtrer
     const tableauFiltre = this.state.users.filter(
@@ -56,6 +66,8 @@ class App extends React.Component {
       {
         users: tableauFiltre,
         user: { prenom: "", nom: "", email: "", telephone: "" },
+        submitType: this.handleSubmit,
+        boutton: "Ajouter",
       },
       () => {
         localStorage.setItem("users", JSON.stringify(tableauFiltre));
@@ -91,12 +103,12 @@ class App extends React.Component {
       users: updatetableau,
       user: { prenom: "", nom: "", email: "", telephone: "" },
       currentIndex: null,
+      submitType: this.handleSubmit,
+      boutton: "Ajouter",
     });
     // Mettre à jour l'état avec le nouveau tableau
     localStorage.setItem("users", JSON.stringify(updatetableau));
     // ----------------
-    this.setState({ submitType: this.handleSubmit });
-    this.setState({ boutton: "Ajouter" });
 
     console.table(this.state.users);
   };
